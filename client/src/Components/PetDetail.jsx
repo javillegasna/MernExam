@@ -15,14 +15,6 @@ const PetDetail = () => {
   useEffect(() => {
     getItem(id, setPet);
   }, [id, pets, getItem]);
-  //utilities
-  const handlerUpdateList = (action, value, dataToUpdate, target) => {
-    const tags = Object.keys(dataToUpdate);
-    const newTarget = tags.reduce((acc, tag) => ({ ...acc, [tag]: value }), {
-      ...target,
-    });
-    action(newTarget);
-  };
   return (
     <>
       {pet !== {} && (
