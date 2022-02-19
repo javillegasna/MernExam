@@ -6,18 +6,18 @@ const handlerError = (res) => (err) => {
 };
 const create = (req, res) => {
   Pet.create(req.body)
-    .then((newPet) => res.json({ author: newPet }))
+    .then((newPet) => res.json({ pet: newPet }))
     .catch(handlerError(res));
 };
 const findAll = (req, res) => {
   Pet.find()
-    .then((ListOfPets) => res.json({ author: ListOfPets }))
+    .then((ListOfPets) => res.json({ pet: ListOfPets }))
     .catch(handlerError(res));
 };
 const findOne = (req, res) => {
   const { id } = req.params;
   Pet.findById(id)
-    .then((onePet) => res.json({ author: onePet }))
+    .then((onePet) => res.json({ pet: onePet }))
     .catch(handlerError(res));
 };
 const deleteOne = (req, res) => {
@@ -32,7 +32,7 @@ const update = (req, res) => {
   //it depends of the model important change!
   const { title} = req.body;
   Pet.findOneAndUpdate({_id:id}, { title }, { new: true })
-    .then((onePet) => res.json({ author: onePet }))
+    .then((onePet) => res.json({ pet: onePet }))
     .catch(handlerError(res));
 };
 
