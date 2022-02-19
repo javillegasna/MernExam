@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProductState from "./contexts/ProductState";
+import PetState from "./contexts/PetState";
 import Main from "./views/Main";
 function App() {
   return (
     <BrowserRouter>
-      <ProductState>
+      <PetState>
         <Routes>
           <Route path="/" element={<Main />} />
         </Routes>
-      </ProductState>
+      </PetState>
     </BrowserRouter>
   );
 }

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import ProductsContext from "../contexts/ProductsContext";
+import PetContext from "../contexts/PetContext";
 
 const Main = () => {
-  const { products, setProducts, getItems } = useContext(ProductsContext);
+  const { products, setProducts, getItems } = useContext(PetContext);
   useEffect(() => {
     getItems(setProducts);
     // eslint-disable-next-line react-hooks/exhaustive-deps

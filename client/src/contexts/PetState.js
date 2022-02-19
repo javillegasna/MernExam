@@ -1,61 +1,61 @@
 import axios from "axios";
 import { useState } from "react";
 import API_URL from "../utils/constants";
-import PlayersContext from "./PlayerContext";
+import PetContext from "./PetContext";
 
-const PlayerState = (props) => {
-  const [players, setPlayers] = useState([]);
+const PetState = (props) => {
+  const [pets, setPets] = useState([]);
   //http actions
   const deleteItem = (id) => {
     axios
-      .delete(`${API_URL}/player/${id}`)
+      .delete(`${API_URL}/pet/${id}`)
       .then((res) =>
-        setPlayers(players.filter((player) => res.data._id !== player._id))
+        setPets(pets.filter((pet) => res.data._id !== pet._id))
       )
       .catch((err) => console.log(err));
   };
   const getItems = (set) => {
     axios
-      .get(`${API_URL}/player/`)
+      .get(`${API_URL}/pet/`)
       .then((res) => {
-        set(res.data.player);
+        set(res.data.pet);
       })
       .catch((err) => console.log(err));
   };
   const getItem = (id, set) => {
     axios
-      .get(`${API_URL}/player/${id}`)
+      .get(`${API_URL}/pet/${id}`)
       .then((res) => {
-        set(res.data.player);
+        set(res.data.pet);
       })
       .catch((err) => console.log(err));
   };
   const postItem = (data) =>
     axios
-      .post(`${API_URL}/player/`, data)
+      .post(`${API_URL}/pet/`, data)
       .then((res) => {
-        const { player } = res.data;
-        setPlayers([player, ...players]);
+        const { pet } = res.data;
+        setPets([pet, ...pets]);
       })
       .catch((err) => err.response.data.data.errors);
   const putItem = (id, data) =>
     axios
-      .put(`${API_URL}/player/${id}`, data)
+      .put(`${API_URL}/pet/${id}`, data)
       .then((res) => {
-        const { player } = res.data;
-        const filteredItems = players.filter(
+        const { pet } = res.data;
+        const filteredItems = pets.filter(
           //importan to change for de name used on api
-          (player) => res.data.player._id !== player._id
+          (pet) => res.data.pet._id !== pet._id
         );
-        setPlayers([player, ...filteredItems]);
+        setPets([pet, ...filteredItems]);
       })
       .catch((err) => err.response.data.data.errors);
 
   return (
-    <PlayersContext.Provider
+    <PetContext.Provider
       value={{
-        players,
-        setPlayers,
+        pets,
+        setPets,
         deleteItem,
         getItems,
         getItem,
@@ -64,8 +64,8 @@ const PlayerState = (props) => {
       }}
     >
       {props.children}
-    </PlayersContext.Provider>
+    </PetContext.Provider>
   );
 };
 
-export default PlayerState;
+export default PetState;

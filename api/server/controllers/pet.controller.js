@@ -1,28 +1,28 @@
 const {ROUTE_NAME} = require("../utils/constants")
-const Author = require(`../models/${ROUTE_NAME}.model`);
+const Pet = require(`../models/${ROUTE_NAME}.model`);
 const handlerError = (res) => (err) => {
   res.status(400);
   res.json({ message: `Something went wrong with${ROUTE_NAME}` , data: err });
 };
 const create = (req, res) => {
-  Author.create(req.body)
-    .then((newAuthor) => res.json({ author: newAuthor }))
+  Pet.create(req.body)
+    .then((newPet) => res.json({ author: newPet }))
     .catch(handlerError(res));
 };
 const findAll = (req, res) => {
-  Author.find()
-    .then((ListOfAuthors) => res.json({ author: ListOfAuthors }))
+  Pet.find()
+    .then((ListOfPets) => res.json({ author: ListOfPets }))
     .catch(handlerError(res));
 };
 const findOne = (req, res) => {
   const { id } = req.params;
-  Author.findById(id)
-    .then((oneAuthor) => res.json({ author: oneAuthor }))
+  Pet.findById(id)
+    .then((onePet) => res.json({ author: onePet }))
     .catch(handlerError(res));
 };
 const deleteOne = (req, res) => {
   const { id } = req.params;
-  Author.findByIdAndDelete(id)
+  Pet.findByIdAndDelete(id)
   .then(deleteConfirmation => res.json(deleteConfirmation))
   .catch(handlerError(res))
 }
@@ -31,8 +31,8 @@ const update = (req, res) => {
   const { id } = req.params;
   //it depends of the model important change!
   const { title} = req.body;
-  Author.findOneAndUpdate({_id:id}, { title }, { new: true })
-    .then((oneAuthor) => res.json({ author: oneAuthor }))
+  Pet.findOneAndUpdate({_id:id}, { title }, { new: true })
+    .then((onePet) => res.json({ author: onePet }))
     .catch(handlerError(res));
 };
 

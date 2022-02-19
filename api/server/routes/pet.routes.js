@@ -1,4 +1,4 @@
-const ROUTE_NAME ="author"
+const {ROUTE_NAME} =require("../utils/constants")
 const Controller = require(`../controllers/${ROUTE_NAME}.controller`);
 module.exports = app => {
   app.post(`/api/${ROUTE_NAME}/`, Controller.create);
