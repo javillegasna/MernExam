@@ -44,6 +44,7 @@ const PlayerState = (props) => {
       .then((res) => {
         const { player } = res.data;
         const filteredItems = players.filter(
+          //importan to change for de name used on api
           (player) => res.data.player._id !== player._id
         );
         setPlayers([player, ...filteredItems]);
