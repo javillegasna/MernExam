@@ -6,6 +6,7 @@ const PetSchema = new mongoose.Schema({
 	skill1: {type:String,},
 	skill2: {type:String,},
 	skill3: {type:String,},
+	likes: {type:Number,},
 },{timestamps:true});
 
 const Pet = mongoose.model("Pet", PetSchema);

@@ -1,17 +1,24 @@
 import React, { useContext, useEffect } from "react";
+import PetList from "../Components/PetList";
 import PetContext from "../contexts/PetContext";
+import Header from "../layout/Header";
 
 const Main = () => {
-  const { products, setProducts, getItems } = useContext(PetContext);
+  const { setPets, getItems } = useContext(PetContext);
   useEffect(() => {
-    getItems(setProducts);
+    getItems(setPets);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(products);
   return (
-    <>
-    <h1>App is running</h1>
-    </>
+    <main>
+      <Header route={"/pets/new"} message={"add a pet to the shelter"} />
+      <div className="card container">
+        <h2 className="card-body" style={{ fontSize: "20px" }}>
+          These pets are looking for a good home
+        </h2>
+      </div>
+      <PetList/>
+    </main>
   );
 };
 

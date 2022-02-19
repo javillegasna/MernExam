@@ -26,7 +26,20 @@ const PetState = (props) => {
     axios
       .get(`${API_URL}/pet/${id}`)
       .then((res) => {
-        set(res.data.pet);
+        const{name,
+        type,
+        description,
+        skill1,
+        skill2,
+        skill3,
+        likes}=res.data.pet
+        set({name,
+          type,
+          description,
+          skill1,
+          skill2,
+          skill3,
+          likes});
       })
       .catch((err) => console.log(err));
   };
