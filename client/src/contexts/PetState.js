@@ -50,14 +50,14 @@ const PetState = (props) => {
         const { pet } = res.data;
         setPets([pet, ...pets]);
       })
-      .catch((err) => err.response.data.data.errors);
+      .catch((err) => err.response.data.data);
   const putItem = (id, data) =>
     axios
       .put(`${API_URL}/pet/${id}`, data)
       .then((res) => {
         const { pet } = res.data;
         const filteredItems = pets.filter(
-          //importan to change for de name used on api
+          //important to change for de name used on api
           (pet) => res.data.pet._id !== pet._id
         );
         setPets([pet, ...filteredItems]);
