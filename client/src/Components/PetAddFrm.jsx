@@ -48,20 +48,30 @@ const PetAddFrm = () => {
   const handlerSubmit = async (e) => {
     e.preventDefault();
     const validationsBack = await postItem(pet);
-    const errorsBack=validationsBack.errors?validationsBack.errors:validationsBack.keyPattern;
-    console.log(errorsBack)
+
+    const errorsBack =
+      validationsBack && (validationsBack.errors || validationsBack.keyPattern)
+        ? validationsBack.errors || validationsBack.keyPattern
+        : false;
+    console.log(errorsBack);
     //errors
     if (errorsBack) {
       //Error states
       handlerUpdateList(setErrors, true, errorsBack, errors);
       //Message to the backend
-      validationsBack.errors?
-      setMsgErrors(
-        Object.keys(errorsBack).reduce(
-          (acc, tag) => ({ ...acc, [tag]: errorsBack[tag].message }),
-          { ...msgErrors }
-        )
-      ):handlerUpdateList(setMsgErrors, "Name must be unique", errorsBack, msgErrors);
+      validationsBack.errors
+        ? setMsgErrors(
+            Object.keys(errorsBack).reduce(
+              (acc, tag) => ({ ...acc, [tag]: errorsBack[tag].message }),
+              { ...msgErrors }
+            )
+          )
+        : handlerUpdateList(
+            setMsgErrors,
+            "Name must be unique",
+            errorsBack,
+            msgErrors
+          );
     } else {
       handlerUpdateList(setErrors, false, pet, errors);
       navigate("/");
@@ -163,7 +173,7 @@ const PetAddFrm = () => {
               name="skill1"
               id="skill1"
               onChange={(e) => {
-                setPet({ ...pet, skill1: e.target.value});
+                setPet({ ...pet, skill1: e.target.value });
               }}
               value={pet.skill1}
             />
@@ -179,7 +189,7 @@ const PetAddFrm = () => {
               name="skill2"
               id="skill2"
               onChange={(e) => {
-                setPet({ ...pet, skill2: e.target.value});
+                setPet({ ...pet, skill2: e.target.value });
               }}
               value={pet.skill2}
             />
@@ -195,7 +205,7 @@ const PetAddFrm = () => {
               name="skill3"
               id="skill3"
               onChange={(e) => {
-                setPet({ ...pet, skill3: e.target.value});
+                setPet({ ...pet, skill3: e.target.value });
               }}
               value={pet.skill3}
             />
